@@ -1,0 +1,32 @@
+# project  configured on Thu Mar 19 15:35:11 2015 by
+# waf 1.7.11 (abi 98, python 20706f0 on darwin)
+# using /Users/jonathan/pebble-dev/PebbleSDK-3.0-dp3/Pebble/waf configure build
+#
+----------------------------------------
+Setting top to
+/Users/jonathan/pebble-dev/Examples/palettetest
+----------------------------------------
+Setting out to
+/Users/jonathan/pebble-dev/Examples/palettetest/build
+----------------------------------------
+Found Pebble SDK for basalt in:
+/Users/jonathan/pebble-dev/PebbleSDK-3.0-dp3/Pebble/basalt
+----------------------------------------
+Checking for program gcc,cc
+arm-none-eabi-gcc
+find program=['gcc', 'cc'] paths='' var='CC' -> 'arm-none-eabi-gcc'
+----------------------------------------
+Checking for program ar
+arm-none-eabi-ar
+find program=['ar'] paths='' var='AR' -> 'arm-none-eabi-ar'
+----------------------------------------
+Found Pebble SDK for aplite in:
+/Users/jonathan/pebble-dev/PebbleSDK-3.0-dp3/Pebble/aplite
+----------------------------------------
+Checking for program gcc,cc
+arm-none-eabi-gcc
+find program=['gcc', 'cc'] paths='' var='CC' -> 'arm-none-eabi-gcc'
+----------------------------------------
+Checking for program ar
+arm-none-eabi-ar
+find program=['ar'] paths='' var='AR' -> 'arm-none-eabi-ar'

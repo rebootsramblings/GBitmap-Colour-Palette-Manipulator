@@ -1,0 +1,31 @@
+{
+    "appKeys": {},
+    "capabilities": [
+        ""
+    ],
+    "companyName": "rebootsramblings",
+    "longName": "PaletteTest",
+    "projectType": "native",
+    "resources": {
+        "media": [
+            {
+                "file": "images/android_bw.png",
+                "name": "IMAGE_ANDROID",
+                "type": "pbi8"
+            },
+            {
+                "file": "images/star.png",
+                "name": "IMAGE_STAR",
+                "type": "png"
+            }
+        ]
+    },
+    "sdkVersion": "3",
+    "shortName": "PaletteTest",
+    "uuid": "1f63e696-e76a-4b77-9e55-008664a5c1ad",
+    "versionCode": 1,
+    "versionLabel": "1.0",
+    "watchapp": {
+        "watchface": false
+    }
+}
