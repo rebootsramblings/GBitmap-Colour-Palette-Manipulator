@@ -42,35 +42,24 @@ void replace_gbitmap_colour(GColor colour_to_replace, GColor replace_with_colour
 	//Get the gbitmap's current palette
 	GColor *current_palette = gbitmap_get_palette(im);
 
-	//Create a new palette 
-	GColor new_palette[num_palette_items];
-
-	//Copy the contents of the gbitmap's current palette into the new palette
-	//We'll replace what we need then copy it back
-	memcpy(new_palette, current_palette, num_palette_items * sizeof(GColor));
-
 	//Iterate through the palette finding the colour we want to replace and replacing 
 	//it with the new colour
-
 	APP_LOG(APP_LOG_LEVEL_DEBUG, "--replace_image_colour Palette Start--");
 	for(int i = 0; i < num_palette_items; i++){
 
-		char * pal_i_col = get_gcolor_text(new_palette[i]);
+		char * pal_i_col = get_gcolor_text(current_palette[i]);
 
 		APP_LOG(APP_LOG_LEVEL_DEBUG, "Palette[%d] = %s", i, pal_i_col);
 
-		if(GColorEq(colour_to_replace, new_palette[i])){
-			new_palette[i] = replace_with_colour;
-			APP_LOG(APP_LOG_LEVEL_DEBUG, "--------------replaced with %s", get_gcolor_text(new_palette[i]) );
+		if(GColorEq(colour_to_replace, current_palette[i])){
+			current_palette[i] = replace_with_colour;
+			APP_LOG(APP_LOG_LEVEL_DEBUG, "--------------replaced with %s", get_gcolor_text(current_palette[i]) );
 
 			break;//the colour can only appear once in the palette
 		}
 
 	}
 	APP_LOG(APP_LOG_LEVEL_DEBUG, "--Palette End--");
-
-	//Copy the updated colour palette into the gbitmap's colour palette
-	memcpy(current_palette, new_palette, num_palette_items * sizeof(GColor));
 
 	//Mark the bitmaplayer dirty
 	layer_mark_dirty(bitmap_layer_get_layer(bml));
