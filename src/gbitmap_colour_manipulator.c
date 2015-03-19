@@ -116,7 +116,7 @@ char* get_gcolor_text(GColor m_color){
 	if(GColorEq(m_color, GColorVividCerulean)) return "GColorVividCerulean";
 	if(GColorEq(m_color, GColorGreen)) return "GColorGreen";
 	if(GColorEq(m_color, GColorMalachite)) return "GColorMalachite";
-	if(GColorEq(m_color, GColorMediumSpringGreen)) return "if(GColorEq(m_color, GColorMediumSpringGreen";
+	if(GColorEq(m_color, GColorMediumSpringGreen)) return "GColorMediumSpringGreen";
 	if(GColorEq(m_color, GColorCyan)) return "GColorCyan";
 	if(GColorEq(m_color, GColorBulgarianRose)) return "GColorBulgarianRose";
 	if(GColorEq(m_color, GColorImperialPurple)) return "GColorImperialPurple";
@@ -135,7 +135,7 @@ char* get_gcolor_text(GColor m_color){
 	if(GColorEq(m_color, GColorMediumAquamarine)) return "GColorMediumAquamarine";
 	if(GColorEq(m_color, GColorElectricBlue)) return "GColorElectricBlue";
 	if(GColorEq(m_color, GColorDarkCandyAppleRed)) return "GColorDarkCandyAppleRed";
-	if(GColorEq(m_color, GColorJazzberryJam)) return "if(GColorEq(m_color, GColorJazzberryJam";
+	if(GColorEq(m_color, GColorJazzberryJam)) return "GColorJazzberryJam";
 	if(GColorEq(m_color, GColorPurple)) return "if(GColorEq(m_color, GColorPurple";
 	if(GColorEq(m_color, GColorVividViolet)) return "GColorVividViolet";
 	if(GColorEq(m_color, GColorWindsorTan)) return "GColorWindsorTan";

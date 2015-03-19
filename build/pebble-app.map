@@ -1024,7 +1024,7 @@ DISCARD
  libm.a(*)
  libgcc.a(*)
  *(.eh_frame)
-OUTPUT(/Users/jonathan/pebble-dev/Examples/palettetest/build/basalt/pebble-app.elf elf32-littlearm)
+OUTPUT(/Users/jonathan/repositories/GBitmap-Colour-Palette-Manipulator/build/basalt/pebble-app.elf elf32-littlearm)
 
 .ARM.attributes
                 0x0000000000000000       0x27
@@ -1079,18 +1079,18 @@ OUTPUT(/Users/jonathan/pebble-dev/Examples/palettetest/build/basalt/pebble-app.e
  .debug_ranges  0x0000000000000000       0x80 src/gbitmap_colour_manipulator.c.23.o
  .debug_ranges  0x0000000000000080       0x70 src/palette_tester.c.23.o
 
-.debug_line     0x0000000000000000      0x5ee
+.debug_line     0x0000000000000000      0x60e
  .debug_line    0x0000000000000000      0x24b src/gbitmap_colour_manipulator.c.23.o
- .debug_line    0x000000000000024b      0x264 src/palette_tester.c.23.o
- .debug_line    0x00000000000004af      0x13f basalt/appinfo.auto.c.23.o
+ .debug_line    0x000000000000024b      0x284 src/palette_tester.c.23.o
+ .debug_line    0x00000000000004cf      0x13f basalt/appinfo.auto.c.23.o
 
-.debug_str      0x0000000000000000      0x8ac
- .debug_str     0x0000000000000000      0x31e src/gbitmap_colour_manipulator.c.23.o
-                                        0x364 (size before relaxing)
- .debug_str     0x000000000000031e      0x41a src/palette_tester.c.23.o
-                                        0x669 (size before relaxing)
- .debug_str     0x0000000000000738      0x174 basalt/appinfo.auto.c.23.o
-                                        0x2b3 (size before relaxing)
+.debug_str      0x0000000000000000      0x8bc
+ .debug_str     0x0000000000000000      0x32e src/gbitmap_colour_manipulator.c.23.o
+                                        0x374 (size before relaxing)
+ .debug_str     0x000000000000032e      0x41a src/palette_tester.c.23.o
+                                        0x679 (size before relaxing)
+ .debug_str     0x0000000000000748      0x174 basalt/appinfo.auto.c.23.o
+                                        0x2c3 (size before relaxing)
 
 .debug_frame    0x0000000000000000      0x164
  .debug_frame   0x0000000000000000       0xa4 src/gbitmap_colour_manipulator.c.23.o
