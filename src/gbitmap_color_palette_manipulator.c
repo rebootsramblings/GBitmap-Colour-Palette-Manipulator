@@ -1,5 +1,5 @@
 
-#include <gbitmap_colour_manipulator.h>
+#include <gbitmap_color_palette_manipulator.h>
 
 #ifdef PBL_COLOR
 
@@ -16,7 +16,7 @@ char* get_gbitmapformat_text(GBitmapFormat format){
 
 }
 
-int get_num_palette_colours(GBitmap *b){
+int get_num_palette_colors(GBitmap *b){
 
 	GBitmapFormat format = gbitmap_get_format(b);
 
@@ -32,30 +32,30 @@ int get_num_palette_colours(GBitmap *b){
 
 }
 
-void replace_gbitmap_colour(GColor colour_to_replace, GColor replace_with_colour, GBitmap *im, BitmapLayer *bml){
+void replace_gbitmap_color(GColor color_to_replace, GColor replace_with_color, GBitmap *im, BitmapLayer *bml){
 
-	//First determine what the humber of colours in the palette
-	int num_palette_items = get_num_palette_colours(im);
+	//First determine what the humber of colors in the palette
+	int num_palette_items = get_num_palette_colors(im);
 
 	APP_LOG(APP_LOG_LEVEL_DEBUG, "Palette has %d items", num_palette_items);
 
 	//Get the gbitmap's current palette
 	GColor *current_palette = gbitmap_get_palette(im);
 
-	//Iterate through the palette finding the colour we want to replace and replacing 
-	//it with the new colour
-	APP_LOG(APP_LOG_LEVEL_DEBUG, "--replace_image_colour Palette Start--");
+	//Iterate through the palette finding the color we want to replace and replacing 
+	//it with the new color
+	APP_LOG(APP_LOG_LEVEL_DEBUG, "--replace_image_color Palette Start--");
 	for(int i = 0; i < num_palette_items; i++){
 
 		char * pal_i_col = get_gcolor_text(current_palette[i]);
 
 		APP_LOG(APP_LOG_LEVEL_DEBUG, "Palette[%d] = %s", i, pal_i_col);
 
-		if(GColorEq(colour_to_replace, current_palette[i])){
-			current_palette[i] = replace_with_colour;
+		if(GColorEq(color_to_replace, current_palette[i])){
+			current_palette[i] = replace_with_color;
 			APP_LOG(APP_LOG_LEVEL_DEBUG, "--------------replaced with %s", get_gcolor_text(current_palette[i]) );
 
-			break;//the colour can only appear once in the palette
+			break;//the color can only appear once in the palette
 		}
 
 	}
@@ -66,10 +66,29 @@ void replace_gbitmap_colour(GColor colour_to_replace, GColor replace_with_colour
 
 }
 
-void spit_gbitmap_colour_palette(GBitmap *im){
+bool gbitmap_color_palette_contains_color(GColor m_color, GBitmap *im){
 
-	//First determine what the humber of colours in the palette
-	int num_palette_items = get_num_palette_colours(im);
+	int num_palette_items = get_num_palette_colors(im);
+	GColor *current_palette = gbitmap_get_palette(im);
+	for(int i = 0; i < num_palette_items; i++){
+
+		if(GColorEq(m_color, current_palette[i])){
+			APP_LOG(APP_LOG_LEVEL_DEBUG, "GBitmap contains: %s", get_gcolor_text(current_palette[i]));
+
+			return true;
+		}
+
+	}
+
+	APP_LOG(APP_LOG_LEVEL_DEBUG, "GBitmap does not contain: %s", get_gcolor_text(m_color));
+	return false;
+
+}
+
+void spit_gbitmap_color_palette(GBitmap *im){
+
+	//First determine what the humber of colors in the palette
+	int num_palette_items = get_num_palette_colors(im);
 
 	APP_LOG(APP_LOG_LEVEL_DEBUG, "Palette has %d items", num_palette_items);
 

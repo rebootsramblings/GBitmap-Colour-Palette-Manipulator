@@ -17,8 +17,8 @@ Discarded input sections
  .jcr           0x0000000000000000        0x0 /Users/jonathan/pebble-dev/PebbleSDK-3.0-dp3/arm-cs-tools/bin/../lib/gcc/arm-none-eabi/4.7.2/thumb2/crtbegin.o
  .tm_clone_table
                 0x0000000000000000        0x0 /Users/jonathan/pebble-dev/PebbleSDK-3.0-dp3/arm-cs-tools/bin/../lib/gcc/arm-none-eabi/4.7.2/thumb2/crtbegin.o
- .text          0x0000000000000000        0x0 src/gbitmap_colour_manipulator.c.23.o
- .bss           0x0000000000000000        0x0 src/gbitmap_colour_manipulator.c.23.o
+ .text          0x0000000000000000        0x0 src/gbitmap_color_palette_manipulator.c.23.o
+ .bss           0x0000000000000000        0x0 src/gbitmap_color_palette_manipulator.c.23.o
  .text          0x0000000000000000        0x0 src/palette_tester.c.23.o
  .bss           0x0000000000000000        0x0 src/palette_tester.c.23.o
  .text          0x0000000000000000        0x0 basalt/appinfo.auto.c.23.o
@@ -818,7 +818,7 @@ Linker script and memory map
 
 LOAD /Users/jonathan/pebble-dev/PebbleSDK-3.0-dp3/arm-cs-tools/bin/../lib/gcc/arm-none-eabi/4.7.2/thumb2/crti.o
 LOAD /Users/jonathan/pebble-dev/PebbleSDK-3.0-dp3/arm-cs-tools/bin/../lib/gcc/arm-none-eabi/4.7.2/thumb2/crtbegin.o
-LOAD src/gbitmap_colour_manipulator.c.23.o
+LOAD src/gbitmap_color_palette_manipulator.c.23.o
 LOAD src/palette_tester.c.23.o
 LOAD basalt/appinfo.auto.c.23.o
 LOAD /Users/jonathan/pebble-dev/PebbleSDK-3.0-dp3/Pebble/basalt/lib/libpebble.a
@@ -842,182 +842,185 @@ LOAD /Users/jonathan/pebble-dev/PebbleSDK-3.0-dp3/arm-cs-tools/bin/../lib/gcc/ar
  .note.gnu.build-id
                 0x0000000000000084       0x24 linker stubs
 
-.text           0x00000000000000a8     0x11d2
+.text           0x00000000000000a8     0x1240
  *(.text)
  .text          0x00000000000000a8       0x14 /Users/jonathan/pebble-dev/PebbleSDK-3.0-dp3/Pebble/basalt/lib/libpebble.a(tmp4Ztj47pebble.o)
  *(.text.*)
  .text.get_gbitmapformat_text
-                0x00000000000000bc       0x4c src/gbitmap_colour_manipulator.c.23.o
+                0x00000000000000bc       0x4c src/gbitmap_color_palette_manipulator.c.23.o
                 0x00000000000000bc                get_gbitmapformat_text
- .text.get_num_palette_colours
-                0x0000000000000108       0x20 src/gbitmap_colour_manipulator.c.23.o
-                0x0000000000000108                get_num_palette_colours
+ .text.get_num_palette_colors
+                0x0000000000000108       0x20 src/gbitmap_color_palette_manipulator.c.23.o
+                0x0000000000000108                get_num_palette_colors
  .text.get_gcolor_text
-                0x0000000000000128      0x688 src/gbitmap_colour_manipulator.c.23.o
+                0x0000000000000128      0x688 src/gbitmap_color_palette_manipulator.c.23.o
                 0x0000000000000128                get_gcolor_text
- .text.spit_gbitmap_colour_palette
-                0x00000000000007b0       0xb0 src/gbitmap_colour_manipulator.c.23.o
-                0x00000000000007b0                spit_gbitmap_colour_palette
- .text.replace_gbitmap_colour
-                0x0000000000000860      0x104 src/gbitmap_colour_manipulator.c.23.o
-                0x0000000000000860                replace_gbitmap_colour
+ .text.spit_gbitmap_color_palette
+                0x00000000000007b0       0xb0 src/gbitmap_color_palette_manipulator.c.23.o
+                0x00000000000007b0                spit_gbitmap_color_palette
+ .text.gbitmap_color_palette_contains_color
+                0x0000000000000860       0x7c src/gbitmap_color_palette_manipulator.c.23.o
+                0x0000000000000860                gbitmap_color_palette_contains_color
+ .text.replace_gbitmap_color
+                0x00000000000008dc       0xe0 src/gbitmap_color_palette_manipulator.c.23.o
+                0x00000000000008dc                replace_gbitmap_color
  .text.select_click_handler
-                0x0000000000000964        0x2 src/palette_tester.c.23.o
- *fill*         0x0000000000000966        0x2 
+                0x00000000000009bc        0x2 src/palette_tester.c.23.o
+ *fill*         0x00000000000009be        0x2 
  .text.window_unload
-                0x0000000000000968       0x30 src/palette_tester.c.23.o
+                0x00000000000009c0       0x30 src/palette_tester.c.23.o
  .text.window_load
-                0x0000000000000998       0xc8 src/palette_tester.c.23.o
+                0x00000000000009f0       0xd0 src/palette_tester.c.23.o
  .text.click_config_provider
-                0x0000000000000a60       0x30 src/palette_tester.c.23.o
+                0x0000000000000ac0       0x30 src/palette_tester.c.23.o
  .text.down_click_handler
-                0x0000000000000a90       0x24 src/palette_tester.c.23.o
+                0x0000000000000af0       0x24 src/palette_tester.c.23.o
  .text.up_click_handler
-                0x0000000000000ab4       0x24 src/palette_tester.c.23.o
+                0x0000000000000b14       0x24 src/palette_tester.c.23.o
  .text.startup.main
-                0x0000000000000ad8       0x64 src/palette_tester.c.23.o
-                0x0000000000000ad8                main
+                0x0000000000000b38       0x64 src/palette_tester.c.23.o
+                0x0000000000000b38                main
  .text.app_event_loop
-                0x0000000000000b3c        0xc /Users/jonathan/pebble-dev/PebbleSDK-3.0-dp3/Pebble/basalt/lib/libpebble.a(tmp4Ztj47pebble.o)
-                0x0000000000000b3c                app_event_loop
- .text.app_log  0x0000000000000b48        0xc /Users/jonathan/pebble-dev/PebbleSDK-3.0-dp3/Pebble/basalt/lib/libpebble.a(tmp4Ztj47pebble.o)
-                0x0000000000000b48                app_log
- .text.bitmap_layer_create
-                0x0000000000000b54        0xc /Users/jonathan/pebble-dev/PebbleSDK-3.0-dp3/Pebble/basalt/lib/libpebble.a(tmp4Ztj47pebble.o)
-                0x0000000000000b54                bitmap_layer_create
- .text.bitmap_layer_destroy
-                0x0000000000000b60        0xc /Users/jonathan/pebble-dev/PebbleSDK-3.0-dp3/Pebble/basalt/lib/libpebble.a(tmp4Ztj47pebble.o)
-                0x0000000000000b60                bitmap_layer_destroy
- .text.bitmap_layer_get_layer
-                0x0000000000000b6c        0xc /Users/jonathan/pebble-dev/PebbleSDK-3.0-dp3/Pebble/basalt/lib/libpebble.a(tmp4Ztj47pebble.o)
-                0x0000000000000b6c                bitmap_layer_get_layer
- .text.bitmap_layer_set_bitmap
-                0x0000000000000b78        0xc /Users/jonathan/pebble-dev/PebbleSDK-3.0-dp3/Pebble/basalt/lib/libpebble.a(tmp4Ztj47pebble.o)
-                0x0000000000000b78                bitmap_layer_set_bitmap
- .text.fonts_get_system_font
-                0x0000000000000b84        0xc /Users/jonathan/pebble-dev/PebbleSDK-3.0-dp3/Pebble/basalt/lib/libpebble.a(tmp4Ztj47pebble.o)
-                0x0000000000000b84                fonts_get_system_font
- .text.gbitmap_create_with_resource
-                0x0000000000000b90        0xc /Users/jonathan/pebble-dev/PebbleSDK-3.0-dp3/Pebble/basalt/lib/libpebble.a(tmp4Ztj47pebble.o)
-                0x0000000000000b90                gbitmap_create_with_resource
- .text.gbitmap_destroy
                 0x0000000000000b9c        0xc /Users/jonathan/pebble-dev/PebbleSDK-3.0-dp3/Pebble/basalt/lib/libpebble.a(tmp4Ztj47pebble.o)
-                0x0000000000000b9c                gbitmap_destroy
- .text.layer_add_child
-                0x0000000000000ba8        0xc /Users/jonathan/pebble-dev/PebbleSDK-3.0-dp3/Pebble/basalt/lib/libpebble.a(tmp4Ztj47pebble.o)
-                0x0000000000000ba8                layer_add_child
- .text.layer_mark_dirty
+                0x0000000000000b9c                app_event_loop
+ .text.app_log  0x0000000000000ba8        0xc /Users/jonathan/pebble-dev/PebbleSDK-3.0-dp3/Pebble/basalt/lib/libpebble.a(tmp4Ztj47pebble.o)
+                0x0000000000000ba8                app_log
+ .text.bitmap_layer_create
                 0x0000000000000bb4        0xc /Users/jonathan/pebble-dev/PebbleSDK-3.0-dp3/Pebble/basalt/lib/libpebble.a(tmp4Ztj47pebble.o)
-                0x0000000000000bb4                layer_mark_dirty
- .text.memcpy   0x0000000000000bc0        0xc /Users/jonathan/pebble-dev/PebbleSDK-3.0-dp3/Pebble/basalt/lib/libpebble.a(tmp4Ztj47pebble.o)
-                0x0000000000000bc0                memcpy
- .text.memset   0x0000000000000bcc        0xc /Users/jonathan/pebble-dev/PebbleSDK-3.0-dp3/Pebble/basalt/lib/libpebble.a(tmp4Ztj47pebble.o)
-                0x0000000000000bcc                memset
- .text.text_layer_create
+                0x0000000000000bb4                bitmap_layer_create
+ .text.bitmap_layer_destroy
+                0x0000000000000bc0        0xc /Users/jonathan/pebble-dev/PebbleSDK-3.0-dp3/Pebble/basalt/lib/libpebble.a(tmp4Ztj47pebble.o)
+                0x0000000000000bc0                bitmap_layer_destroy
+ .text.bitmap_layer_get_layer
+                0x0000000000000bcc        0xc /Users/jonathan/pebble-dev/PebbleSDK-3.0-dp3/Pebble/basalt/lib/libpebble.a(tmp4Ztj47pebble.o)
+                0x0000000000000bcc                bitmap_layer_get_layer
+ .text.bitmap_layer_set_bitmap
                 0x0000000000000bd8        0xc /Users/jonathan/pebble-dev/PebbleSDK-3.0-dp3/Pebble/basalt/lib/libpebble.a(tmp4Ztj47pebble.o)
-                0x0000000000000bd8                text_layer_create
- .text.text_layer_destroy
+                0x0000000000000bd8                bitmap_layer_set_bitmap
+ .text.fonts_get_system_font
                 0x0000000000000be4        0xc /Users/jonathan/pebble-dev/PebbleSDK-3.0-dp3/Pebble/basalt/lib/libpebble.a(tmp4Ztj47pebble.o)
-                0x0000000000000be4                text_layer_destroy
- .text.text_layer_get_layer
+                0x0000000000000be4                fonts_get_system_font
+ .text.gbitmap_create_with_resource
                 0x0000000000000bf0        0xc /Users/jonathan/pebble-dev/PebbleSDK-3.0-dp3/Pebble/basalt/lib/libpebble.a(tmp4Ztj47pebble.o)
-                0x0000000000000bf0                text_layer_get_layer
- .text.text_layer_set_font
+                0x0000000000000bf0                gbitmap_create_with_resource
+ .text.gbitmap_destroy
                 0x0000000000000bfc        0xc /Users/jonathan/pebble-dev/PebbleSDK-3.0-dp3/Pebble/basalt/lib/libpebble.a(tmp4Ztj47pebble.o)
-                0x0000000000000bfc                text_layer_set_font
- .text.text_layer_set_text
+                0x0000000000000bfc                gbitmap_destroy
+ .text.layer_add_child
                 0x0000000000000c08        0xc /Users/jonathan/pebble-dev/PebbleSDK-3.0-dp3/Pebble/basalt/lib/libpebble.a(tmp4Ztj47pebble.o)
-                0x0000000000000c08                text_layer_set_text
- .text.window_create
+                0x0000000000000c08                layer_add_child
+ .text.layer_mark_dirty
                 0x0000000000000c14        0xc /Users/jonathan/pebble-dev/PebbleSDK-3.0-dp3/Pebble/basalt/lib/libpebble.a(tmp4Ztj47pebble.o)
-                0x0000000000000c14                window_create
- .text.window_destroy
-                0x0000000000000c20        0xc /Users/jonathan/pebble-dev/PebbleSDK-3.0-dp3/Pebble/basalt/lib/libpebble.a(tmp4Ztj47pebble.o)
-                0x0000000000000c20                window_destroy
- .text.window_get_root_layer
-                0x0000000000000c2c        0xc /Users/jonathan/pebble-dev/PebbleSDK-3.0-dp3/Pebble/basalt/lib/libpebble.a(tmp4Ztj47pebble.o)
-                0x0000000000000c2c                window_get_root_layer
- .text.window_set_click_config_provider
+                0x0000000000000c14                layer_mark_dirty
+ .text.memcpy   0x0000000000000c20        0xc /Users/jonathan/pebble-dev/PebbleSDK-3.0-dp3/Pebble/basalt/lib/libpebble.a(tmp4Ztj47pebble.o)
+                0x0000000000000c20                memcpy
+ .text.memset   0x0000000000000c2c        0xc /Users/jonathan/pebble-dev/PebbleSDK-3.0-dp3/Pebble/basalt/lib/libpebble.a(tmp4Ztj47pebble.o)
+                0x0000000000000c2c                memset
+ .text.text_layer_create
                 0x0000000000000c38        0xc /Users/jonathan/pebble-dev/PebbleSDK-3.0-dp3/Pebble/basalt/lib/libpebble.a(tmp4Ztj47pebble.o)
-                0x0000000000000c38                window_set_click_config_provider
- .text.window_set_window_handlers
+                0x0000000000000c38                text_layer_create
+ .text.text_layer_destroy
                 0x0000000000000c44        0xc /Users/jonathan/pebble-dev/PebbleSDK-3.0-dp3/Pebble/basalt/lib/libpebble.a(tmp4Ztj47pebble.o)
-                0x0000000000000c44                window_set_window_handlers
- .text.window_stack_push
+                0x0000000000000c44                text_layer_destroy
+ .text.text_layer_get_layer
                 0x0000000000000c50        0xc /Users/jonathan/pebble-dev/PebbleSDK-3.0-dp3/Pebble/basalt/lib/libpebble.a(tmp4Ztj47pebble.o)
-                0x0000000000000c50                window_stack_push
- .text.window_single_click_subscribe
+                0x0000000000000c50                text_layer_get_layer
+ .text.text_layer_set_font
                 0x0000000000000c5c        0xc /Users/jonathan/pebble-dev/PebbleSDK-3.0-dp3/Pebble/basalt/lib/libpebble.a(tmp4Ztj47pebble.o)
-                0x0000000000000c5c                window_single_click_subscribe
- .text.GColorEq
+                0x0000000000000c5c                text_layer_set_font
+ .text.text_layer_set_text
                 0x0000000000000c68        0xc /Users/jonathan/pebble-dev/PebbleSDK-3.0-dp3/Pebble/basalt/lib/libpebble.a(tmp4Ztj47pebble.o)
-                0x0000000000000c68                GColorEq
- .text.bitmap_layer_set_background_color
+                0x0000000000000c68                text_layer_set_text
+ .text.window_create
                 0x0000000000000c74        0xc /Users/jonathan/pebble-dev/PebbleSDK-3.0-dp3/Pebble/basalt/lib/libpebble.a(tmp4Ztj47pebble.o)
-                0x0000000000000c74                bitmap_layer_set_background_color
- .text.text_layer_set_background_color
+                0x0000000000000c74                window_create
+ .text.window_destroy
                 0x0000000000000c80        0xc /Users/jonathan/pebble-dev/PebbleSDK-3.0-dp3/Pebble/basalt/lib/libpebble.a(tmp4Ztj47pebble.o)
-                0x0000000000000c80                text_layer_set_background_color
- .text.text_layer_set_text_color
+                0x0000000000000c80                window_destroy
+ .text.window_get_root_layer
                 0x0000000000000c8c        0xc /Users/jonathan/pebble-dev/PebbleSDK-3.0-dp3/Pebble/basalt/lib/libpebble.a(tmp4Ztj47pebble.o)
-                0x0000000000000c8c                text_layer_set_text_color
- .text.gbitmap_get_format
+                0x0000000000000c8c                window_get_root_layer
+ .text.window_set_click_config_provider
                 0x0000000000000c98        0xc /Users/jonathan/pebble-dev/PebbleSDK-3.0-dp3/Pebble/basalt/lib/libpebble.a(tmp4Ztj47pebble.o)
-                0x0000000000000c98                gbitmap_get_format
- .text.gbitmap_get_palette
+                0x0000000000000c98                window_set_click_config_provider
+ .text.window_set_window_handlers
                 0x0000000000000ca4        0xc /Users/jonathan/pebble-dev/PebbleSDK-3.0-dp3/Pebble/basalt/lib/libpebble.a(tmp4Ztj47pebble.o)
-                0x0000000000000ca4                gbitmap_get_palette
+                0x0000000000000ca4                window_set_window_handlers
+ .text.window_stack_push
+                0x0000000000000cb0        0xc /Users/jonathan/pebble-dev/PebbleSDK-3.0-dp3/Pebble/basalt/lib/libpebble.a(tmp4Ztj47pebble.o)
+                0x0000000000000cb0                window_stack_push
+ .text.window_single_click_subscribe
+                0x0000000000000cbc        0xc /Users/jonathan/pebble-dev/PebbleSDK-3.0-dp3/Pebble/basalt/lib/libpebble.a(tmp4Ztj47pebble.o)
+                0x0000000000000cbc                window_single_click_subscribe
+ .text.GColorEq
+                0x0000000000000cc8        0xc /Users/jonathan/pebble-dev/PebbleSDK-3.0-dp3/Pebble/basalt/lib/libpebble.a(tmp4Ztj47pebble.o)
+                0x0000000000000cc8                GColorEq
+ .text.bitmap_layer_set_background_color
+                0x0000000000000cd4        0xc /Users/jonathan/pebble-dev/PebbleSDK-3.0-dp3/Pebble/basalt/lib/libpebble.a(tmp4Ztj47pebble.o)
+                0x0000000000000cd4                bitmap_layer_set_background_color
+ .text.text_layer_set_background_color
+                0x0000000000000ce0        0xc /Users/jonathan/pebble-dev/PebbleSDK-3.0-dp3/Pebble/basalt/lib/libpebble.a(tmp4Ztj47pebble.o)
+                0x0000000000000ce0                text_layer_set_background_color
+ .text.text_layer_set_text_color
+                0x0000000000000cec        0xc /Users/jonathan/pebble-dev/PebbleSDK-3.0-dp3/Pebble/basalt/lib/libpebble.a(tmp4Ztj47pebble.o)
+                0x0000000000000cec                text_layer_set_text_color
+ .text.gbitmap_get_format
+                0x0000000000000cf8        0xc /Users/jonathan/pebble-dev/PebbleSDK-3.0-dp3/Pebble/basalt/lib/libpebble.a(tmp4Ztj47pebble.o)
+                0x0000000000000cf8                gbitmap_get_format
+ .text.gbitmap_get_palette
+                0x0000000000000d04        0xc /Users/jonathan/pebble-dev/PebbleSDK-3.0-dp3/Pebble/basalt/lib/libpebble.a(tmp4Ztj47pebble.o)
+                0x0000000000000d04                gbitmap_get_palette
  *(.rodata)
- .rodata        0x0000000000000cb0       0x10 src/palette_tester.c.23.o
+ .rodata        0x0000000000000d10       0x10 src/palette_tester.c.23.o
  *(.rodata*)
  .rodata.str1.1
-                0x0000000000000cc0      0x59c src/gbitmap_colour_manipulator.c.23.o
- .rodata.CSWTCH.13
-                0x000000000000125c        0x3 src/gbitmap_colour_manipulator.c.23.o
+                0x0000000000000d20      0x5aa src/gbitmap_color_palette_manipulator.c.23.o
+ .rodata.CSWTCH.10
+                0x00000000000012ca        0x3 src/gbitmap_color_palette_manipulator.c.23.o
  .rodata.str1.1
-                0x000000000000125f       0x1b src/palette_tester.c.23.o
+                0x00000000000012cd       0x1b src/palette_tester.c.23.o
 
-.glue_7         0x000000000000127c        0x0
+.glue_7         0x00000000000012e8        0x0
  .glue_7        0x0000000000000000        0x0 linker stubs
 
-.glue_7t        0x000000000000127c        0x0
+.glue_7t        0x00000000000012e8        0x0
  .glue_7t       0x0000000000000000        0x0 linker stubs
 
-.vfp11_veneer   0x000000000000127c        0x0
+.vfp11_veneer   0x00000000000012e8        0x0
  .vfp11_veneer  0x0000000000000000        0x0 linker stubs
 
-.v4_bx          0x000000000000127c        0x0
+.v4_bx          0x00000000000012e8        0x0
  .v4_bx         0x0000000000000000        0x0 linker stubs
 
-.iplt           0x000000000000127c        0x0
+.iplt           0x00000000000012e8        0x0
  .iplt          0x0000000000000000        0x0 /Users/jonathan/pebble-dev/PebbleSDK-3.0-dp3/arm-cs-tools/bin/../lib/gcc/arm-none-eabi/4.7.2/thumb2/crtbegin.o
 
-.rel.dyn        0x000000000000127c        0x0
+.rel.dyn        0x00000000000012e8        0x0
  .rel.iplt      0x0000000000000000        0x0 /Users/jonathan/pebble-dev/PebbleSDK-3.0-dp3/arm-cs-tools/bin/../lib/gcc/arm-none-eabi/4.7.2/thumb2/crtbegin.o
 
-.data           0x000000000000127c        0x4
+.data           0x00000000000012e8        0x4
  *(.data)
- .data          0x000000000000127c        0x0 /Users/jonathan/pebble-dev/PebbleSDK-3.0-dp3/arm-cs-tools/bin/../lib/gcc/arm-none-eabi/4.7.2/thumb2/crti.o
- .data          0x000000000000127c        0x4 /Users/jonathan/pebble-dev/PebbleSDK-3.0-dp3/arm-cs-tools/bin/../lib/gcc/arm-none-eabi/4.7.2/thumb2/crtbegin.o
-                0x000000000000127c                __dso_handle
- .data          0x0000000000001280        0x0 src/gbitmap_colour_manipulator.c.23.o
- .data          0x0000000000001280        0x0 src/palette_tester.c.23.o
- .data          0x0000000000001280        0x0 basalt/appinfo.auto.c.23.o
- .data          0x0000000000001280        0x0 /Users/jonathan/pebble-dev/PebbleSDK-3.0-dp3/Pebble/basalt/lib/libpebble.a(tmp4Ztj47pebble.o)
- .data          0x0000000000001280        0x0 /Users/jonathan/pebble-dev/PebbleSDK-3.0-dp3/arm-cs-tools/bin/../lib/gcc/arm-none-eabi/4.7.2/thumb2/crtend.o
- .data          0x0000000000001280        0x0 /Users/jonathan/pebble-dev/PebbleSDK-3.0-dp3/arm-cs-tools/bin/../lib/gcc/arm-none-eabi/4.7.2/thumb2/crtn.o
+ .data          0x00000000000012e8        0x0 /Users/jonathan/pebble-dev/PebbleSDK-3.0-dp3/arm-cs-tools/bin/../lib/gcc/arm-none-eabi/4.7.2/thumb2/crti.o
+ .data          0x00000000000012e8        0x4 /Users/jonathan/pebble-dev/PebbleSDK-3.0-dp3/arm-cs-tools/bin/../lib/gcc/arm-none-eabi/4.7.2/thumb2/crtbegin.o
+                0x00000000000012e8                __dso_handle
+ .data          0x00000000000012ec        0x0 src/gbitmap_color_palette_manipulator.c.23.o
+ .data          0x00000000000012ec        0x0 src/palette_tester.c.23.o
+ .data          0x00000000000012ec        0x0 basalt/appinfo.auto.c.23.o
+ .data          0x00000000000012ec        0x0 /Users/jonathan/pebble-dev/PebbleSDK-3.0-dp3/Pebble/basalt/lib/libpebble.a(tmp4Ztj47pebble.o)
+ .data          0x00000000000012ec        0x0 /Users/jonathan/pebble-dev/PebbleSDK-3.0-dp3/arm-cs-tools/bin/../lib/gcc/arm-none-eabi/4.7.2/thumb2/crtend.o
+ .data          0x00000000000012ec        0x0 /Users/jonathan/pebble-dev/PebbleSDK-3.0-dp3/arm-cs-tools/bin/../lib/gcc/arm-none-eabi/4.7.2/thumb2/crtn.o
  *(.data.*)
 
-.igot.plt       0x0000000000001280        0x0
+.igot.plt       0x00000000000012ec        0x0
  .igot.plt      0x0000000000000000        0x0 /Users/jonathan/pebble-dev/PebbleSDK-3.0-dp3/arm-cs-tools/bin/../lib/gcc/arm-none-eabi/4.7.2/thumb2/crtbegin.o
 
-.bss            0x0000000000001280       0x10
+.bss            0x00000000000012ec       0x10
  *(.bss)
  *(.bss.*)
- .bss.m_text_l  0x0000000000001280        0x4 src/palette_tester.c.23.o
- .bss.image     0x0000000000001284        0x4 src/palette_tester.c.23.o
- .bss.b_layer   0x0000000000001288        0x4 src/palette_tester.c.23.o
- .bss.window    0x000000000000128c        0x4 src/palette_tester.c.23.o
+ .bss.m_text_l  0x00000000000012ec        0x4 src/palette_tester.c.23.o
+ .bss.image     0x00000000000012f0        0x4 src/palette_tester.c.23.o
+ .bss.b_layer   0x00000000000012f4        0x4 src/palette_tester.c.23.o
+ .bss.window    0x00000000000012f8        0x4 src/palette_tester.c.23.o
 
 DISCARD
  libc.a(*)
@@ -1033,7 +1036,7 @@ OUTPUT(/Users/jonathan/repositories/GBitmap-Colour-Palette-Manipulator/build/bas
  .ARM.attributes
                 0x0000000000000019       0x29 /Users/jonathan/pebble-dev/PebbleSDK-3.0-dp3/arm-cs-tools/bin/../lib/gcc/arm-none-eabi/4.7.2/thumb2/crtbegin.o
  .ARM.attributes
-                0x0000000000000042       0x33 src/gbitmap_colour_manipulator.c.23.o
+                0x0000000000000042       0x33 src/gbitmap_color_palette_manipulator.c.23.o
  .ARM.attributes
                 0x0000000000000075       0x33 src/palette_tester.c.23.o
  .ARM.attributes
@@ -1048,50 +1051,50 @@ OUTPUT(/Users/jonathan/repositories/GBitmap-Colour-Palette-Manipulator/build/bas
 .comment        0x0000000000000000       0x4e
  .comment       0x0000000000000000       0x4e /Users/jonathan/pebble-dev/PebbleSDK-3.0-dp3/arm-cs-tools/bin/../lib/gcc/arm-none-eabi/4.7.2/thumb2/crtbegin.o
                                          0x4f (size before relaxing)
- .comment       0x0000000000000000       0x4f src/gbitmap_colour_manipulator.c.23.o
+ .comment       0x0000000000000000       0x4f src/gbitmap_color_palette_manipulator.c.23.o
  .comment       0x0000000000000000       0x4f src/palette_tester.c.23.o
  .comment       0x0000000000000000       0x4f basalt/appinfo.auto.c.23.o
  .comment       0x0000000000000000       0x4f /Users/jonathan/pebble-dev/PebbleSDK-3.0-dp3/arm-cs-tools/bin/../lib/gcc/arm-none-eabi/4.7.2/thumb2/crtend.o
 
-.debug_info     0x0000000000000000     0x1b2b
- .debug_info    0x0000000000000000      0xd54 src/gbitmap_colour_manipulator.c.23.o
- .debug_info    0x0000000000000d54      0xac9 src/palette_tester.c.23.o
- .debug_info    0x000000000000181d      0x30e basalt/appinfo.auto.c.23.o
+.debug_info     0x0000000000000000     0x1bed
+ .debug_info    0x0000000000000000      0xde9 src/gbitmap_color_palette_manipulator.c.23.o
+ .debug_info    0x0000000000000de9      0xaf6 src/palette_tester.c.23.o
+ .debug_info    0x00000000000018df      0x30e basalt/appinfo.auto.c.23.o
 
-.debug_abbrev   0x0000000000000000      0x5b6
- .debug_abbrev  0x0000000000000000      0x22a src/gbitmap_colour_manipulator.c.23.o
- .debug_abbrev  0x000000000000022a      0x2ee src/palette_tester.c.23.o
- .debug_abbrev  0x0000000000000518       0x9e basalt/appinfo.auto.c.23.o
+.debug_abbrev   0x0000000000000000      0x5b5
+ .debug_abbrev  0x0000000000000000      0x229 src/gbitmap_color_palette_manipulator.c.23.o
+ .debug_abbrev  0x0000000000000229      0x2ee src/palette_tester.c.23.o
+ .debug_abbrev  0x0000000000000517       0x9e basalt/appinfo.auto.c.23.o
 
-.debug_loc      0x0000000000000000      0x550
- .debug_loc     0x0000000000000000      0x32b src/gbitmap_colour_manipulator.c.23.o
- .debug_loc     0x000000000000032b      0x225 src/palette_tester.c.23.o
+.debug_loc      0x0000000000000000      0x61b
+ .debug_loc     0x0000000000000000      0x3f6 src/gbitmap_color_palette_manipulator.c.23.o
+ .debug_loc     0x00000000000003f6      0x225 src/palette_tester.c.23.o
 
-.debug_aranges  0x0000000000000000       0xa8
+.debug_aranges  0x0000000000000000       0xb0
  .debug_aranges
-                0x0000000000000000       0x40 src/gbitmap_colour_manipulator.c.23.o
+                0x0000000000000000       0x48 src/gbitmap_color_palette_manipulator.c.23.o
  .debug_aranges
-                0x0000000000000040       0x50 src/palette_tester.c.23.o
+                0x0000000000000048       0x50 src/palette_tester.c.23.o
  .debug_aranges
-                0x0000000000000090       0x18 basalt/appinfo.auto.c.23.o
+                0x0000000000000098       0x18 basalt/appinfo.auto.c.23.o
 
-.debug_ranges   0x0000000000000000       0xf0
- .debug_ranges  0x0000000000000000       0x80 src/gbitmap_colour_manipulator.c.23.o
- .debug_ranges  0x0000000000000080       0x70 src/palette_tester.c.23.o
+.debug_ranges   0x0000000000000000      0x118
+ .debug_ranges  0x0000000000000000       0xa8 src/gbitmap_color_palette_manipulator.c.23.o
+ .debug_ranges  0x00000000000000a8       0x70 src/palette_tester.c.23.o
 
-.debug_line     0x0000000000000000      0x60e
- .debug_line    0x0000000000000000      0x24b src/gbitmap_colour_manipulator.c.23.o
- .debug_line    0x000000000000024b      0x284 src/palette_tester.c.23.o
- .debug_line    0x00000000000004cf      0x13f basalt/appinfo.auto.c.23.o
+.debug_line     0x0000000000000000      0x654
+ .debug_line    0x0000000000000000      0x289 src/gbitmap_color_palette_manipulator.c.23.o
+ .debug_line    0x0000000000000289      0x28c src/palette_tester.c.23.o
+ .debug_line    0x0000000000000515      0x13f basalt/appinfo.auto.c.23.o
 
-.debug_str      0x0000000000000000      0x8bc
- .debug_str     0x0000000000000000      0x32e src/gbitmap_colour_manipulator.c.23.o
-                                        0x374 (size before relaxing)
- .debug_str     0x000000000000032e      0x41a src/palette_tester.c.23.o
-                                        0x679 (size before relaxing)
- .debug_str     0x0000000000000748      0x174 basalt/appinfo.auto.c.23.o
+.debug_str      0x0000000000000000      0x8e3
+ .debug_str     0x0000000000000000      0x355 src/gbitmap_color_palette_manipulator.c.23.o
+                                        0x39b (size before relaxing)
+ .debug_str     0x0000000000000355      0x41a src/palette_tester.c.23.o
+                                        0x69c (size before relaxing)
+ .debug_str     0x000000000000076f      0x174 basalt/appinfo.auto.c.23.o
                                         0x2c3 (size before relaxing)
 
-.debug_frame    0x0000000000000000      0x164
- .debug_frame   0x0000000000000000       0xa4 src/gbitmap_colour_manipulator.c.23.o
- .debug_frame   0x00000000000000a4       0xc0 src/palette_tester.c.23.o
+.debug_frame    0x0000000000000000      0x184
+ .debug_frame   0x0000000000000000       0xc4 src/gbitmap_color_palette_manipulator.c.23.o
+ .debug_frame   0x00000000000000c4       0xc0 src/palette_tester.c.23.o

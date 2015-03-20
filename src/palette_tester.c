@@ -1,5 +1,5 @@
 
-#include <gbitmap_colour_manipulator.h>
+#include <gbitmap_color_palette_manipulator.h>
 
 static Window *window = NULL;
 static BitmapLayer *b_layer = NULL;
@@ -15,16 +15,16 @@ static void select_click_handler(ClickRecognizerRef recognizer, void *context) {
 
 static void up_click_handler(ClickRecognizerRef recognizer, void *context) {
 	#ifdef PBL_COLOR
-		replace_gbitmap_colour(GColorSunsetOrange, GColorDukeBlue, image, b_layer);
-		//replace_image_colour(GColorBlack, GColorDukeBlue, image, b_layer);
+		replace_gbitmap_color(GColorSunsetOrange, GColorDukeBlue, image, b_layer);
+		//replace_image_color(GColorBlack, GColorDukeBlue, image, b_layer);
 	#endif
 
 }
 
 static void down_click_handler(ClickRecognizerRef recognizer, void *context) {
 	#ifdef PBL_COLOR
-		replace_gbitmap_colour(GColorDukeBlue, GColorSunsetOrange, image, b_layer);
-		//replace_image_colour(GColorDukeBlue, GColorBlack, image, b_layer);
+		replace_gbitmap_color(GColorDukeBlue, GColorSunsetOrange, image, b_layer);
+		//replace_image_color(GColorDukeBlue, GColorBlack, image, b_layer);
 	#endif
 
 }
@@ -57,7 +57,9 @@ static void window_load(Window *window) {
 	//NOTE: Image is loaded with black background because it's a transparent PNG
 	image = gbitmap_create_with_resource(RESOURCE_ID_IMAGE_STAR);
 	bitmap_layer_set_bitmap(b_layer, image);
-	spit_gbitmap_colour_palette(image);
+	spit_gbitmap_color_palette(image);
+
+	gbitmap_color_palette_contains_color(GColorSunsetOrange, image);
 	//Display the format of the image
 	display_gbitmapformat_text(image);
 
