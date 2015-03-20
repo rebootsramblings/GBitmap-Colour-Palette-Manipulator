@@ -4,11 +4,29 @@ This library was created in order to manipulate the color palettes of gbitmaps. 
 
 The library includes a sample project which loads a picture and spits out its color palette. You can then decide which colors to replace. 
 
-The following library calls are available:
+Before you start. Ensure that your resources are of type ```pbi8``` or ```png``` in your ```appinfo.json``` file as follows:
+```c
+"resources": {
+        "media": [
+            {
+                "file": "images/android_bw.png",
+                "name": "IMAGE_ANDROID",
+                "type": "pbi8"
+            },
+            {
+                "file": "images/star.png",
+                "name": "IMAGE_STAR",
+                "type": "png"
+            }
+        ]
+    },
+  ```
+
+**The following library calls are available:**
 ```c
 char* get_gbitmapformat_text(GBitmapFormat format);
 ```
-This function will return the GBitmapFormat for the given GBitmapFormat.
+This function will return the GBitmapFormat text for the given GBitmapFormat.
 
 ```c
 char* get_gcolor_text(GColor m_color);
