@@ -51,6 +51,6 @@ This is function allows you to pass in a gbitmap, the color you want to replace 
 **Known issues:**
 You may notice that the library is spitting out a lot of "UNKNOWN COLOR"s. All 64 colors and GColorClear cases are covered and I am working on trying to figure out why UNKNOWN COLORs are being found. The likely culprit is transparency colors. 
 
-Enjoy and feel free to provide feedback or ideas.
+If you use this library in your project, giving credit to Reboot's Ramblings (Twitter: @RebootRamblings) would be greatly appreciated but is not mandatory.
 
 Jonathan.
