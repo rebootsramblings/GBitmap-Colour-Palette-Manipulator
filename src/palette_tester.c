@@ -11,6 +11,12 @@ static void display_gbitmapformat_text(GBitmap *b);
 #endif
 
 static void select_click_handler(ClickRecognizerRef recognizer, void *context) {
+	#ifdef PBL_COLOR
+	if(gbitmap_color_palette_contains_color(GColorSunsetOrange, image)){
+		gbitmap_fill_all_except(GColorSunsetOrange, GColorMayGreen, image, b_layer);
+	}
+	#endif
+
 }
 
 static void up_click_handler(ClickRecognizerRef recognizer, void *context) {
@@ -59,7 +65,9 @@ static void window_load(Window *window) {
 	bitmap_layer_set_bitmap(b_layer, image);
 	spit_gbitmap_color_palette(image);
 
+	//Function demo
 	gbitmap_color_palette_contains_color(GColorSunsetOrange, image);
+
 	//Display the format of the image
 	display_gbitmapformat_text(image);
 

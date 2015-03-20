@@ -62,7 +62,43 @@ void replace_gbitmap_color(GColor color_to_replace, GColor replace_with_color, G
 	APP_LOG(APP_LOG_LEVEL_DEBUG, "--Palette End--");
 
 	//Mark the bitmaplayer dirty
-	layer_mark_dirty(bitmap_layer_get_layer(bml));
+	if(bml != NULL){
+		layer_mark_dirty(bitmap_layer_get_layer(bml));
+	}
+
+}
+
+void gbitmap_fill_all_except(GColor color_to_not_change, GColor fill_color, GBitmap *im, BitmapLayer *bml){
+
+	//First determine what the humber of colors in the palette
+	int num_palette_items = get_num_palette_colors(im);
+
+	APP_LOG(APP_LOG_LEVEL_DEBUG, "Palette has %d items", num_palette_items);
+
+	//Get the gbitmap's current palette
+	GColor *current_palette = gbitmap_get_palette(im);
+
+	//Iterate through the palette finding the color we want to replace and replacing 
+	//it with the new color
+	APP_LOG(APP_LOG_LEVEL_DEBUG, "--Color Fill Start--");
+	for(int i = 0; i < num_palette_items; i++){
+
+		char * pal_i_col = get_gcolor_text(current_palette[i]);
+
+		APP_LOG(APP_LOG_LEVEL_DEBUG, "Palette[%d] = %s", i, pal_i_col);
+
+		if(!GColorEq(color_to_not_change, current_palette[i])){
+			current_palette[i] = fill_color;
+			APP_LOG(APP_LOG_LEVEL_DEBUG, "--------------filled with %s", get_gcolor_text(current_palette[i]) );
+		}
+
+	}
+	APP_LOG(APP_LOG_LEVEL_DEBUG, "--Color Fill End--");
+
+	//Mark the bitmaplayer dirty
+	if(bml != NULL){
+		layer_mark_dirty(bitmap_layer_get_layer(bml));
+	}
 
 }
 
