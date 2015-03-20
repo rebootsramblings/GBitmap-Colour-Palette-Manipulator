@@ -4,7 +4,8 @@ This library was created in order to manipulate the color palettes of gbitmaps. 
 
 The library includes a sample project which loads a picture and spits out its color palette. You can then decide which colors to replace. 
 
-Before you start. Ensure that your resources are of type ```pbi8``` or ```png``` in your ```appinfo.json``` file as follows:
+Before you start. Ensure that your resources are of type ```pbi8``` or ```png``` in your ```appinfo.json``` file. Black and White images must be of type ```pbi8`` or they will be imported as 1 bit non paletized images. Resources of type ```pbi``` will not work since they do not have a color palette.
+
 ```c
 "resources": {
         "media": [
