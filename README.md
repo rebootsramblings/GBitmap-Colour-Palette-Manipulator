@@ -44,9 +44,14 @@ void spit_gbitmap_color_palette(GBitmap *im);
 This function will spit out the number of colors in a gbitmap and will list which colors it contains. This is one of the most important functions in this library since you'll want to pass your gbitmap to it the first time in order to determine which colors it contains; which you'll use in the next function.
 
 ```c
+void gbitmap_fill_all_except(GColor color_to_not_change, GColor fill_color, GBitmap *im, BitmapLayer *bml);
+```
+This function will replace all colors in the gbitmap's palette except for the color your specify not to change. Tip: Very useful for filling the background color of a icon. I use this before setting a new icon color to clean up any stray colors, leaving only the background color and icon color. Pass NULL to *bml if you do not want to update a BitmapLayer (useful for gbitmaps on your action bar).
+
+```c
 void replace_gbitmap_color(GColor color_to_replace, GColor replace_with_color, GBitmap *im, BitmapLayer *bml);
 ```
-This is function allows you to pass in a gbitmap, the color you want to replace and the target color. You also pass your BitmapLayer to this function so that it can automatically be marked dirty. This is an all in one function; it replaces the specified color and automatically updates the BitmapLayer.
+This is function allows you to pass in a gbitmap, the color you want to replace and the target color. You also pass your BitmapLayer to this function so that it can automatically be marked dirty. This is an all in one function; it replaces the specified color and automatically updates the BitmapLayer. Pass NULL to *bml if you do not want to update a BitmapLayer (useful for gbitmaps on your action bar).
 
 **Known issues:**
 You may notice that the library is spitting out a lot of "UNKNOWN COLOR"s. All 64 colors and GColorClear cases are covered and I am working on trying to figure out why UNKNOWN COLORs are being found. The likely culprit is transparency colors. 
