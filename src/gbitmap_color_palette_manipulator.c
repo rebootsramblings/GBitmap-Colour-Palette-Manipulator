@@ -3,6 +3,8 @@
 
 #ifdef PBL_COLOR
 
+#define SHOW_APP_LOGS true
+
 char* get_gbitmapformat_text(GBitmapFormat format){
 	switch (format) {
 		case GBitmapFormat1Bit: return "GBitmapFormat1Bit";
@@ -34,32 +36,30 @@ int get_num_palette_colors(GBitmap *b){
 
 void replace_gbitmap_color(GColor color_to_replace, GColor replace_with_color, GBitmap *im, BitmapLayer *bml){
 
-	//First determine what the humber of colors in the palette
+	//First determine what the number of colors in the palette
 	int num_palette_items = get_num_palette_colors(im);
 
-	APP_LOG(APP_LOG_LEVEL_DEBUG, "Palette has %d items", num_palette_items);
+	if(SHOW_APP_LOGS) APP_LOG(APP_LOG_LEVEL_DEBUG, "Palette has %d items", num_palette_items);
 
 	//Get the gbitmap's current palette
 	GColor *current_palette = gbitmap_get_palette(im);
 
 	//Iterate through the palette finding the color we want to replace and replacing 
 	//it with the new color
-	APP_LOG(APP_LOG_LEVEL_DEBUG, "--replace_image_color Palette Start--");
+	if(SHOW_APP_LOGS) APP_LOG(APP_LOG_LEVEL_DEBUG, "--Replace Color Start--");
 	for(int i = 0; i < num_palette_items; i++){
 
-		char * pal_i_col = get_gcolor_text(current_palette[i]);
-
-		APP_LOG(APP_LOG_LEVEL_DEBUG, "Palette[%d] = %s", i, pal_i_col);
+		if(SHOW_APP_LOGS) APP_LOG(APP_LOG_LEVEL_DEBUG, "Palette[%d] = %s", i, get_gcolor_text(current_palette[i]));
 
 		if(GColorEq(color_to_replace, current_palette[i])){
 			current_palette[i] = replace_with_color;
-			APP_LOG(APP_LOG_LEVEL_DEBUG, "--------------replaced with %s", get_gcolor_text(current_palette[i]) );
+			if(SHOW_APP_LOGS) APP_LOG(APP_LOG_LEVEL_DEBUG, "-------[%d] replaced with %s", i, get_gcolor_text(current_palette[i]) );
 
-			break;//the color can only appear once in the palette
+			break;//the color should only appear once in the palette
 		}
 
 	}
-	APP_LOG(APP_LOG_LEVEL_DEBUG, "--Palette End--");
+	if(SHOW_APP_LOGS) APP_LOG(APP_LOG_LEVEL_DEBUG, "--Replace Color End--");
 
 	//Mark the bitmaplayer dirty
 	if(bml != NULL){
@@ -70,30 +70,27 @@ void replace_gbitmap_color(GColor color_to_replace, GColor replace_with_color, G
 
 void gbitmap_fill_all_except(GColor color_to_not_change, GColor fill_color, GBitmap *im, BitmapLayer *bml){
 
-	//First determine what the humber of colors in the palette
+	//First determine what the number of colors in the palette
 	int num_palette_items = get_num_palette_colors(im);
 
-	APP_LOG(APP_LOG_LEVEL_DEBUG, "Palette has %d items", num_palette_items);
+	if(SHOW_APP_LOGS) APP_LOG(APP_LOG_LEVEL_DEBUG, "Palette has %d items", num_palette_items);
 
 	//Get the gbitmap's current palette
 	GColor *current_palette = gbitmap_get_palette(im);
 
-	//Iterate through the palette finding the color we want to replace and replacing 
-	//it with the new color
-	APP_LOG(APP_LOG_LEVEL_DEBUG, "--Color Fill Start--");
+	//Iterate through the palette replacing all colors except the color_to_not_change
+	if(SHOW_APP_LOGS) APP_LOG(APP_LOG_LEVEL_DEBUG, "--Color Fill Start--");
 	for(int i = 0; i < num_palette_items; i++){
 
-		char * pal_i_col = get_gcolor_text(current_palette[i]);
-
-		APP_LOG(APP_LOG_LEVEL_DEBUG, "Palette[%d] = %s", i, pal_i_col);
+		if(SHOW_APP_LOGS) APP_LOG(APP_LOG_LEVEL_DEBUG, "Palette[%d] = %s", i, get_gcolor_text(current_palette[i]));
 
 		if(!GColorEq(color_to_not_change, current_palette[i])){
 			current_palette[i] = fill_color;
-			APP_LOG(APP_LOG_LEVEL_DEBUG, "--------------filled with %s", get_gcolor_text(current_palette[i]) );
+			if(SHOW_APP_LOGS) APP_LOG(APP_LOG_LEVEL_DEBUG, "-------[%d] filled with %s", i, get_gcolor_text(current_palette[i]) );
 		}
 
 	}
-	APP_LOG(APP_LOG_LEVEL_DEBUG, "--Color Fill End--");
+	if(SHOW_APP_LOGS) APP_LOG(APP_LOG_LEVEL_DEBUG, "--Color Fill End--");
 
 	//Mark the bitmaplayer dirty
 	if(bml != NULL){
@@ -109,14 +106,14 @@ bool gbitmap_color_palette_contains_color(GColor m_color, GBitmap *im){
 	for(int i = 0; i < num_palette_items; i++){
 
 		if(GColorEq(m_color, current_palette[i])){
-			APP_LOG(APP_LOG_LEVEL_DEBUG, "GBitmap contains: %s", get_gcolor_text(current_palette[i]));
+			if(SHOW_APP_LOGS) APP_LOG(APP_LOG_LEVEL_DEBUG, "GBitmap contains: %s", get_gcolor_text(current_palette[i]));
 
 			return true;
 		}
 
 	}
 
-	APP_LOG(APP_LOG_LEVEL_DEBUG, "GBitmap does not contain: %s", get_gcolor_text(m_color));
+	if(SHOW_APP_LOGS) APP_LOG(APP_LOG_LEVEL_DEBUG, "GBitmap does not contain: %s", get_gcolor_text(m_color));
 	return false;
 
 }
@@ -130,87 +127,85 @@ void spit_gbitmap_color_palette(GBitmap *im){
 
 	GColor *current_palette = gbitmap_get_palette(im);
 
-	GColor new_palette[num_palette_items];
-
-	memcpy(new_palette, current_palette, num_palette_items * sizeof(GColor));
-
 	APP_LOG(APP_LOG_LEVEL_DEBUG, "--Spit Palette Start--");
 	for(int i = 0; i < num_palette_items; i++){
 
-		APP_LOG(APP_LOG_LEVEL_DEBUG, "Palette[%d] = %s", i, get_gcolor_text(new_palette[i]));
+		APP_LOG(APP_LOG_LEVEL_DEBUG, "Palette[%d] = %s", i, get_gcolor_text(current_palette[i]));
 
 	}
-	APP_LOG(APP_LOG_LEVEL_DEBUG, "--Palette End--");
+	APP_LOG(APP_LOG_LEVEL_DEBUG, "--Spit Palette End--");
 
 }
 
+//Couldn't use a switch/case here since GColor doesn't resolve to an integer
+//If you have a better implementation than the below please feel free to share it
 char* get_gcolor_text(GColor m_color){
-	
-	if(GColorEq(m_color, GColorBlack)) return "GColorBlack";
-	if(GColorEq(m_color, GColorOxfordBlue)) return "GColorOxfordBlue";
-	if(GColorEq(m_color, GColorDukeBlue)) return "GColorDukeBlue";
-	if(GColorEq(m_color, GColorBlue)) return "GColorBlue";
-	if(GColorEq(m_color, GColorDarkGreen)) return "GColorDarkGreen";
-	if(GColorEq(m_color, GColorMidnightGreen)) return "GColorMidnightGreen";
-	if(GColorEq(m_color, GColorCobaltBlue)) return "GColorCobaltBlue";
-	if(GColorEq(m_color, GColorBlueMoon)) return "GColorCobaltBlue";
-	if(GColorEq(m_color, GColorIslamicGreen)) return "GColorIslamicGreen";
-	if(GColorEq(m_color, GColorJaegerGreen)) return "GColorJaegerGreen";
-	if(GColorEq(m_color, GColorTiffanyBlue)) return "GColorTiffanyBlue";
-	if(GColorEq(m_color, GColorVividCerulean)) return "GColorVividCerulean";
-	if(GColorEq(m_color, GColorGreen)) return "GColorGreen";
-	if(GColorEq(m_color, GColorMalachite)) return "GColorMalachite";
-	if(GColorEq(m_color, GColorMediumSpringGreen)) return "GColorMediumSpringGreen";
-	if(GColorEq(m_color, GColorCyan)) return "GColorCyan";
-	if(GColorEq(m_color, GColorBulgarianRose)) return "GColorBulgarianRose";
-	if(GColorEq(m_color, GColorImperialPurple)) return "GColorImperialPurple";
-	if(GColorEq(m_color, GColorIndigo)) return "GColorIndigo";
-	if(GColorEq(m_color, GColorElectricUltramarine)) return "GColorElectricUltramarine";
-	if(GColorEq(m_color, GColorArmyGreen)) return "GColorArmyGreen";
-	if(GColorEq(m_color, GColorDarkGray)) return "GColorDarkGray";
-	if(GColorEq(m_color, GColorLiberty)) return "GColorLiberty";
-	if(GColorEq(m_color, GColorVeryLightBlue)) return "GColorVeryLightBlue";
-	if(GColorEq(m_color, GColorKellyGreen)) return "GColorKellyGreen";
-	if(GColorEq(m_color, GColorMayGreen)) return "GColorMayGreen";
-	if(GColorEq(m_color, GColorCadetBlue)) return "GColorCadetBlue";
-	if(GColorEq(m_color, GColorPictonBlue)) return "GColorPictonBlue";
-	if(GColorEq(m_color, GColorBrightGreen)) return "GColorBrightGreen";
-	if(GColorEq(m_color, GColorScreaminGreen)) return "GColorScreaminGreen";
-	if(GColorEq(m_color, GColorMediumAquamarine)) return "GColorMediumAquamarine";
-	if(GColorEq(m_color, GColorElectricBlue)) return "GColorElectricBlue";
-	if(GColorEq(m_color, GColorDarkCandyAppleRed)) return "GColorDarkCandyAppleRed";
-	if(GColorEq(m_color, GColorJazzberryJam)) return "GColorJazzberryJam";
-	if(GColorEq(m_color, GColorPurple)) return "if(GColorEq(m_color, GColorPurple";
-	if(GColorEq(m_color, GColorVividViolet)) return "GColorVividViolet";
-	if(GColorEq(m_color, GColorWindsorTan)) return "GColorWindsorTan";
-	if(GColorEq(m_color, GColorRoseVale)) return "GColorWindsorTan";
-	if(GColorEq(m_color, GColorPurpureus)) return "GColorPurpureus";
-	if(GColorEq(m_color, GColorLavenderIndigo)) return "GColorLavenderIndigo";
-	if(GColorEq(m_color, GColorLimerick)) return "GColorLimerick";
-	if(GColorEq(m_color, GColorBrass)) return "GColorBrass";
-	if(GColorEq(m_color, GColorLightGray)) return "GColorLightGray";
-	if(GColorEq(m_color, GColorBabyBlueEyes)) return "GColorBabyBlueEyes";
-	if(GColorEq(m_color, GColorSpringBud)) return "GColorSpringBud";
-	if(GColorEq(m_color, GColorInchworm)) return "GColorInchworm";
-	if(GColorEq(m_color, GColorMintGreen)) return "GColorMintGreen";
-	if(GColorEq(m_color, GColorCeleste)) return "GColorCeleste";
-	if(GColorEq(m_color, GColorRed)) return "GColorRed";
-	if(GColorEq(m_color, GColorFolly)) return "GColorFolly";
-	if(GColorEq(m_color, GColorFashionMagenta)) return "GColorFashionMagenta";
-	if(GColorEq(m_color, GColorMagenta)) return "GColorMagenta";
-	if(GColorEq(m_color, GColorOrange)) return "GColorOrange";
-	if(GColorEq(m_color, GColorSunsetOrange)) return "GColorSunsetOrange";
-	if(GColorEq(m_color, GColorBrilliantRose)) return "GColorBrilliantRose";
-	if(GColorEq(m_color, GColorShockingPink)) return "GColorShockingPink";
-	if(GColorEq(m_color, GColorChromeYellow)) return "GColorChromeYellow";
-	if(GColorEq(m_color, GColorRajah)) return "GColorRajah";
-	if(GColorEq(m_color, GColorMelon)) return "GColorMelon";
-	if(GColorEq(m_color, GColorRichBrilliantLavender)) return "GColorRichBrilliantLavender";
-	if(GColorEq(m_color, GColorYellow)) return "GColorYellow";
-	if(GColorEq(m_color, GColorIcterine)) return "GColorIcterine";
-	if(GColorEq(m_color, GColorPastelYellow)) return "GColorPastelYellow";
-	if(GColorEq(m_color, GColorWhite)) return "GColorWhite";
-	if(GColorEq(m_color, GColorClear)) return "GColorClear";
+
+	if(GColorEq(m_color, GColorBlack)){ return "GColorBlack";}
+	else if(GColorEq(m_color, GColorOxfordBlue)){ return "GColorOxfordBlue";}
+	else if(GColorEq(m_color, GColorDukeBlue)){ return "GColorDukeBlue";}
+	else if(GColorEq(m_color, GColorBlue)){ return "GColorBlue";}
+	else if(GColorEq(m_color, GColorDarkGreen)){ return "GColorDarkGreen";}
+	else if(GColorEq(m_color, GColorMidnightGreen)){ return "GColorMidnightGreen";}
+	else if(GColorEq(m_color, GColorCobaltBlue)){ return "GColorCobaltBlue";}
+	else if(GColorEq(m_color, GColorBlueMoon)){ return "GColorCobaltBlue";}
+	else if(GColorEq(m_color, GColorIslamicGreen)){ return "GColorIslamicGreen";}
+	else if(GColorEq(m_color, GColorJaegerGreen)){ return "GColorJaegerGreen";}
+	else if(GColorEq(m_color, GColorTiffanyBlue)){ return "GColorTiffanyBlue";}
+	else if(GColorEq(m_color, GColorVividCerulean)){ return "GColorVividCerulean";}
+	else if(GColorEq(m_color, GColorGreen)){ return "GColorGreen";}
+	else if(GColorEq(m_color, GColorMalachite)){ return "GColorMalachite";}
+	else if(GColorEq(m_color, GColorMediumSpringGreen)){ return "GColorMediumSpringGreen";}
+	else if(GColorEq(m_color, GColorCyan)){ return "GColorCyan";}
+	else if(GColorEq(m_color, GColorBulgarianRose)){ return "GColorBulgarianRose";}
+	else if(GColorEq(m_color, GColorImperialPurple)){ return "GColorImperialPurple";}
+	else if(GColorEq(m_color, GColorIndigo)){ return "GColorIndigo";}
+	else if(GColorEq(m_color, GColorElectricUltramarine)){ return "GColorElectricUltramarine";}
+	else if(GColorEq(m_color, GColorArmyGreen)){ return "GColorArmyGreen";}
+	else if(GColorEq(m_color, GColorDarkGray)){ return "GColorDarkGray";}
+	else if(GColorEq(m_color, GColorLiberty)){ return "GColorLiberty";}
+	else if(GColorEq(m_color, GColorVeryLightBlue)){ return "GColorVeryLightBlue";}
+	else if(GColorEq(m_color, GColorKellyGreen)){ return "GColorKellyGreen";}
+	else if(GColorEq(m_color, GColorMayGreen)){ return "GColorMayGreen";}
+	else if(GColorEq(m_color, GColorCadetBlue)){ return "GColorCadetBlue";}
+	else if(GColorEq(m_color, GColorPictonBlue)){ return "GColorPictonBlue";}
+	else if(GColorEq(m_color, GColorBrightGreen)){ return "GColorBrightGreen";}
+	else if(GColorEq(m_color, GColorScreaminGreen)){ return "GColorScreaminGreen";}
+	else if(GColorEq(m_color, GColorMediumAquamarine)){ return "GColorMediumAquamarine";}
+	else if(GColorEq(m_color, GColorElectricBlue)){ return "GColorElectricBlue";}
+	else if(GColorEq(m_color, GColorDarkCandyAppleRed)){ return "GColorDarkCandyAppleRed";}
+	else if(GColorEq(m_color, GColorJazzberryJam)){ return "GColorJazzberryJam";}
+	else if(GColorEq(m_color, GColorPurple)){ return "GColorPurple";}
+	else if(GColorEq(m_color, GColorVividViolet)){ return "GColorVividViolet";}
+	else if(GColorEq(m_color, GColorWindsorTan)){ return "GColorWindsorTan";}
+	else if(GColorEq(m_color, GColorRoseVale)){ return "GColorWindsorTan";}
+	else if(GColorEq(m_color, GColorPurpureus)){ return "GColorPurpureus";}
+	else if(GColorEq(m_color, GColorLavenderIndigo)){ return "GColorLavenderIndigo";}
+	else if(GColorEq(m_color, GColorLimerick)){ return "GColorLimerick";}
+	else if(GColorEq(m_color, GColorBrass)){ return "GColorBrass";}
+	else if(GColorEq(m_color, GColorLightGray)){ return "GColorLightGray";}
+	else if(GColorEq(m_color, GColorBabyBlueEyes)){ return "GColorBabyBlueEyes";}
+	else if(GColorEq(m_color, GColorSpringBud)){ return "GColorSpringBud";}
+	else if(GColorEq(m_color, GColorInchworm)){ return "GColorInchworm";}
+	else if(GColorEq(m_color, GColorMintGreen)){ return "GColorMintGreen";}
+	else if(GColorEq(m_color, GColorCeleste)){ return "GColorCeleste";}
+	else if(GColorEq(m_color, GColorRed)){ return "GColorRed";}
+	else if(GColorEq(m_color, GColorFolly)){ return "GColorFolly";}
+	else if(GColorEq(m_color, GColorFashionMagenta)){ return "GColorFashionMagenta";}
+	else if(GColorEq(m_color, GColorMagenta)){ return "GColorMagenta";}
+	else if(GColorEq(m_color, GColorOrange)){ return "GColorOrange";}
+	else if(GColorEq(m_color, GColorSunsetOrange)){ return "GColorSunsetOrange";}
+	else if(GColorEq(m_color, GColorBrilliantRose)){ return "GColorBrilliantRose";}
+	else if(GColorEq(m_color, GColorShockingPink)){ return "GColorShockingPink";}
+	else if(GColorEq(m_color, GColorChromeYellow)){ return "GColorChromeYellow";}
+	else if(GColorEq(m_color, GColorRajah)){ return "GColorRajah";}
+	else if(GColorEq(m_color, GColorMelon)){ return "GColorMelon";}
+	else if(GColorEq(m_color, GColorRichBrilliantLavender)){ return "GColorRichBrilliantLavender";}
+	else if(GColorEq(m_color, GColorYellow)){ return "GColorYellow";}
+	else if(GColorEq(m_color, GColorIcterine)){ return "GColorIcterine";}
+	else if(GColorEq(m_color, GColorPastelYellow)){ return "GColorPastelYellow";}
+	else if(GColorEq(m_color, GColorWhite)){ return "GColorWhite";}
+	else if(GColorEq(m_color, GColorClear)){ return "GColorClear";}
 
 	return "UNKNOWN COLOR";
 
