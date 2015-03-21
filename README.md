@@ -1,6 +1,6 @@
 # GBitmap-Colour-Palette-Manipulator
 
-This library was created in order to manipulate the color palettes of gbitmaps at runtime. It will be useful if you are trying to adapt your black and white pebble app and app icons for Pebble Time (colors). Instead of including resources for each color of an icon, you can just change it's color palette with this library.
+This library was created in order to manipulate the color palettes of gbitmaps at runtime. It will be useful if you are trying to adapt your black and white pebble app and app icons for Pebble Time (colors). Instead of including resources for each color of an image/icon, you can just change it's color palette with this library.
 
 The library includes a sample project which loads a picture and spits out its color palette. You can then decide which colors to replace. 
 
