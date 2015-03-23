@@ -1,5 +1,5 @@
 
-#include <gbitmap_color_palette_manipulator.h>
+#include "gbitmap_color_palette_manipulator.h"
 
 #ifdef PBL_COLOR
 
@@ -51,11 +51,13 @@ void replace_gbitmap_color(GColor color_to_replace, GColor replace_with_color, G
 
 		if(SHOW_APP_LOGS) APP_LOG(APP_LOG_LEVEL_DEBUG, "Palette[%d] = %s", i, get_gcolor_text(current_palette[i]));
 
-		if(GColorEq(color_to_replace, current_palette[i])){
-			current_palette[i] = replace_with_color;
+
+		if ((color_to_replace.argb & 0x3F)==(current_palette[i].argb & 0x3F)){
+
+			current_palette[i].argb = (current_palette[i].argb & 0xC0)| (replace_with_color.argb & 0x3F);
 			if(SHOW_APP_LOGS) APP_LOG(APP_LOG_LEVEL_DEBUG, "-------[%d] replaced with %s", i, get_gcolor_text(current_palette[i]) );
 
-			break;//the color should only appear once in the palette
+			//break;//the color should only appear once in the palette
 		}
 
 	}
@@ -92,7 +94,7 @@ void gbitmap_fill_all_except(GColor color_to_not_change, GColor fill_color, GBit
 	}
 	if(SHOW_APP_LOGS) APP_LOG(APP_LOG_LEVEL_DEBUG, "--Color Fill End--");
 
-	//Mark the bitmaplayer dirty
+	//Mark the bitmap layer dirty
 	if(bml != NULL){
 		layer_mark_dirty(bitmap_layer_get_layer(bml));
 	}
@@ -105,7 +107,7 @@ bool gbitmap_color_palette_contains_color(GColor m_color, GBitmap *im){
 	GColor *current_palette = gbitmap_get_palette(im);
 	for(int i = 0; i < num_palette_items; i++){
 
-		if(GColorEq(m_color, current_palette[i])){
+		if ((m_color.argb & 0x3F)==(current_palette[i].argb & 0x3F)){
 			if(SHOW_APP_LOGS) APP_LOG(APP_LOG_LEVEL_DEBUG, "GBitmap contains: %s", get_gcolor_text(current_palette[i]));
 
 			return true;
@@ -120,7 +122,7 @@ bool gbitmap_color_palette_contains_color(GColor m_color, GBitmap *im){
 
 void spit_gbitmap_color_palette(GBitmap *im){
 
-	//First determine what the humber of colors in the palette
+	//First determine what the number of colors in the palette
 	int num_palette_items = get_num_palette_colors(im);
 
 	APP_LOG(APP_LOG_LEVEL_DEBUG, "Palette has %d items", num_palette_items);
@@ -130,17 +132,38 @@ void spit_gbitmap_color_palette(GBitmap *im){
 	APP_LOG(APP_LOG_LEVEL_DEBUG, "--Spit Palette Start--");
 	for(int i = 0; i < num_palette_items; i++){
 
-		APP_LOG(APP_LOG_LEVEL_DEBUG, "Palette[%d] = %s", i, get_gcolor_text(current_palette[i]));
+		APP_LOG(APP_LOG_LEVEL_DEBUG, "Palette[%d] = %s (alpha:%d)", i, get_gcolor_text(current_palette[i]),(current_palette[i].argb >>6) );
 
 	}
 	APP_LOG(APP_LOG_LEVEL_DEBUG, "--Spit Palette End--");
 
 }
 
-//Couldn't use a switch/case here since GColor doesn't resolve to an integer
-//If you have a better implementation than the below please feel free to share it
-char* get_gcolor_text(GColor m_color){
+const char * GColorsNames[]= {
+ "GColorBlack", "GColorOxfordBlue", "GColorDukeBlue", "GColorBlue", 
+ "GColorDarkGreen", "GColorMidnightGreen", "GColorCobaltBlue", "GColorBlueMoon", 
+ "GColorIslamicGreen", "GColorJaegerGreen", "GColorTiffanyBlue", "GColorVividCerulean", 
+ "GColorGreen", "GColorMalachite", "GColorMediumSpringGreen", "GColorCyan", 
+ "GColorBulgarianRose", "GColorImperialPurple", "GColorIndigo", "GColorElectricUltramarine", 
+ "GColorArmyGreen", "GColorDarkGray", "GColorLiberty", "GColorVeryLightBlue", 
+ "GColorKellyGreen", "GColorMayGreen", "GColorCadetBlue", "GColorPictonBlue",
+ "GColorBrightGreen", "GColorScreaminGreen", "GColorMediumAquamarine", "GColorElectricBlue",
+ "GColorDarkCandyAppleRed", "GColorJazzberryJam", "GColorPurple", "GColorVividViolet",
+ "GColorWindsorTan", "GColorRoseVale", "GColorPurpureus", "GColorLavenderIndigo",
+ "GColorLimerick", "GColorBrass", "GColorLightGray", "GColorBabyBlueEyes",
+ "GColorSpringBud", "GColorInchworm", "GColorMintGreen", "GColorCeleste",
+ "GColorRed", "GColorFolly", "GColorFashionMagenta", "GColorMagenta",
+ "GColorOrange", "GColorSunsetOrange", "GColorBrilliantRose", "GColorShockingPink",
+ "GColorChromeYellow", "GColorRajah", "GColorMelon", "GColorRichBrilliantLavender",
+ "GColorYellow", "GColorIcterine", "GColorPastelYellow", "GColorWhite"
+};
 
+const char* get_gcolor_text(GColor m_color){
+	if(GColorEq(m_color, GColorClear))
+		return "GColorClear";
+	return GColorsNames[m_color.argb & 0x3F];
+/*
+	m_color.argb|=0xC0; //optional method
 	if(GColorEq(m_color, GColorBlack)){ return "GColorBlack";}
 	else if(GColorEq(m_color, GColorOxfordBlue)){ return "GColorOxfordBlue";}
 	else if(GColorEq(m_color, GColorDukeBlue)){ return "GColorDukeBlue";}
@@ -205,10 +228,9 @@ char* get_gcolor_text(GColor m_color){
 	else if(GColorEq(m_color, GColorIcterine)){ return "GColorIcterine";}
 	else if(GColorEq(m_color, GColorPastelYellow)){ return "GColorPastelYellow";}
 	else if(GColorEq(m_color, GColorWhite)){ return "GColorWhite";}
-	else if(GColorEq(m_color, GColorClear)){ return "GColorClear";}
 
 	return "UNKNOWN COLOR";
-
+*/
 
 }
-#endif
+#endif	
