@@ -70,10 +70,7 @@ This will set all palette entries to White except for the Black of your image/ic
 - 3) Perform the following function call on the gbitmap ```gbitmap_fill_all_except(GColorBlack, GColorWhite, your_gbitmap, NULL);```
 - 4) The gbitmap now has a palette that contains only Black (for the icon) and White (as the icon background). You can now manipulate the palette of this gbitmap more efficiently.
 
-**Known issues:**
-
-You may notice that the library is spitting out a lot of "UNKNOWN COLOR"s. All 64 colors and GColorClear cases are covered and I am working on trying to figure out why UNKNOWN COLORs are being found. The likely culprit is transparent colors. 
-
-If you use this library in your project, giving credit to Reboot's Ramblings would be greatly appreciated but is not mandatory.
+Credits:
+I'd like to thank @gregoiresage and @ron064 for their contributions to the library.
 
 Jonathan.
