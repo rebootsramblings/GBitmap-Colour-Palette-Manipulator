@@ -1,5 +1,5 @@
 
-#include <gbitmap_color_palette_manipulator.h>
+#include "gbitmap_color_palette_manipulator.h"
 
 static Window *window = NULL;
 static BitmapLayer *b_layer = NULL;
