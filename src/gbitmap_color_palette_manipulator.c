@@ -103,8 +103,8 @@ void gbitmap_fill_all_except(GColor color_to_not_change, GColor fill_color, bool
 		APP_LOG(APP_LOG_LEVEL_DEBUG, "Palette[%d] = %s", i, get_gcolor_text(current_palette[i]));
 		#endif
 
-		if(!GColorEq(color_to_not_change, current_palette[i])){//all colors except color_to_not_change
-			if((GColorEq(current_palette[i], GColorClear) && fill_gcolorclear) || !GColorEq(current_palette[i], GColorClear)){
+		if(!gcolor_equal(color_to_not_change, current_palette[i])){//all colors except color_to_not_change
+			if((gcolor_equal(current_palette[i], GColorClear) && fill_gcolorclear) || !gcolor_equal(current_palette[i], GColorClear)){
 				current_palette[i] = fill_color;
 				#ifdef SHOW_APP_LOGS
 				APP_LOG(APP_LOG_LEVEL_DEBUG, "-------[%d] filled with %s", i, get_gcolor_text(current_palette[i]) );
@@ -187,7 +187,7 @@ const char * GColorsNames[]= {
 };
 
 const char* get_gcolor_text(GColor m_color){
-	if(GColorEq(m_color, GColorClear))
+	if(gcolor_equal(m_color, GColorClear))
 		return "GColorClear";
 	return GColorsNames[m_color.argb & 0x3F];
 
