@@ -13,7 +13,7 @@ static void display_gbitmapformat_text(GBitmap *b);
 static void select_click_handler(ClickRecognizerRef recognizer, void *context) {
 	#ifdef PBL_COLOR
 	if(gbitmap_color_palette_contains_color(GColorSunsetOrange, image)){
-		gbitmap_fill_all_except(GColorSunsetOrange, GColorMayGreen, image, b_layer);
+		gbitmap_fill_all_except(GColorSunsetOrange, GColorMayGreen, true, image, b_layer);
 	}
 	#endif
 
