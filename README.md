@@ -70,6 +70,29 @@ This will set all palette entries to White except for the Black of your image/ic
 - 3) Perform the following function call on the gbitmap ```gbitmap_fill_all_except(GColorBlack, GColorWhite, true, your_gbitmap, NULL);```
 - 4) The gbitmap now has a palette that contains only Black (for the icon) and White (as the icon background). You can now manipulate the palette of this gbitmap more efficiently.
 
+**Helper Functions**
+Include these in your project to save some time with changing icon colors. Use ```set_icon_color``` by passing it your newly loaded gbitmap and set first_adaptation ```true``` for the first icon color change, ```false``` for subsequent color changes.
+```c
+#ifdef PBL_COLOR
+//sets black icon with white background to black icon with clear background
+static void convert_bw_to_clear_bg(GBitmap *icon){
+  if(icon == NULL)return;
+  gbitmap_fill_all_except(GColorBlack, GColorClear, true, icon, NULL);//Fill the background
+}
+
+void set_icon_color(GBitmap *icon, GColor m_color, bool first_adaptation){
+
+  if(icon == NULL)return;
+
+  if(first_adaptation){
+      convert_bw_to_clear_bg(icon);
+  }
+  gbitmap_fill_all_except(GColorClear, m_color, true, icon, NULL);//Fill the background
+}
+
+#endif
+```
+
 Credits:
 I'd like to thank @gregoiresage and @ron064 for their contributions to the library.
 
